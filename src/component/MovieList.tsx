@@ -1,21 +1,17 @@
 import MovieItem from "./MovieItem";
 import "./MovieList.css";
 import { useState, useEffect } from "react";
-import Store from "../domain/Store";
+import Store from "../domain/convertApimoviesToMovies";
 import { fetchPopularMovies } from "../domain/movieAPI";
 import { Movie } from "../util/type";
 
 const MovieList: React.FC = () => {
-  // 처음에느 일단 리스트가 스켈레톤 20개 생성 각 아이템들은 api호출이 끝나면 표시하기 만약 값이 없으면 자시 자신 삭제
   const [itemCount, setItemCount] = useState(20);
   const [page, setPage] = useState(1);
   const [movies, setMovie] = useState<Movie[]>([]);
 
   useEffect(() => {
-    console.log("호출");
-    // 비동기 데이터를 가져오는 함수
     const fetchData = async () => {
-      console.log("page :" + page);
       const data = await fetchPopularMovies(page);
       setMovie((prevMovies) => [...prevMovies, ...Store(data)]);
     };

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Movie from "./component/MovieItem.tsx";
-import Store from "./domain/Store.tsx";
+import Store from "./domain/convertApimoviesToMovies.tsx";
 import Header from "./component/Header.tsx";
 import "./App.css";
 import MovieList from "./component/MovieList.tsx";
