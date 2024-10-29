@@ -1,0 +1,11 @@
+.App {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: antiquewhite;
+}
+
+.movieListWrapper {
+  display: flex;
+  justify-content: center;
+}
