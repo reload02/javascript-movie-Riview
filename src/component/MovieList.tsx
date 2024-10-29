@@ -5,7 +5,12 @@ import Store from "../domain/convertApimoviesToMovies";
 import { fetchPopularMovies } from "../domain/movieAPI";
 import { Movie } from "../util/type";
 
-const MovieList: React.FC = () => {
+interface MovieListProps {
+  searchText: string;
+  isEnter: boolean;
+}
+
+const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
   const [itemCount, setItemCount] = useState(20);
   const [page, setPage] = useState(1);
   const [movies, setMovie] = useState<Movie[]>([]);
@@ -13,11 +18,16 @@ const MovieList: React.FC = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchPopularMovies(page);
+      const data = await fetchPopularMovies(page, searchText);
       setMovie((prevMovies) => [...prevMovies, ...Store(data)]);
     };
     fetchData();
-  }, [page]);
+  }, [page, searchText, isEnter]);
+
+  useEffect(() => {
+    setMovie([]);
+    setPage(1);
+  }, [isEnter]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -36,10 +46,19 @@ const MovieList: React.FC = () => {
   }, []);
 
   return (
-    <div className="MovieList">
-      {Array.from({ length: itemCount }).map((_, index) => (
-        <MovieItem key={index} idx={index} movies={movies} />
-      ))}
+    <div
+      className="MovieList"
+      onClick={() => {
+        console.log(itemCount);
+      }}
+    >
+      {Array.from({ length: itemCount }).map((_, index) =>
+        itemCount > 0 ? (
+          <MovieItem key={index} idx={index} movies={movies} />
+        ) : (
+          <div>ㅋㅋ</div>
+        )
+      )}
       <div ref={observerRef} style={{ height: "1px" }} />
     </div>
   );

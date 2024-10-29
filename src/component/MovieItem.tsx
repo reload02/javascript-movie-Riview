@@ -20,7 +20,7 @@ const MovieItem: React.FC<MovieItemProps> = ({ idx, movies }) => {
   else
     return (
       <>
-        <div>
+        <div className="MovieItem">
           <img
             className="movieImage"
             src={`https://image.tmdb.org/t/p/w200/${movies[idx].poster}`}
