@@ -1,37 +1,27 @@
 import "./MovieItem.css";
 import { Movie } from "../util/type";
+import SkeletonMovieItem from "./SkeletonMovieItem";
 
 interface MovieItemProps {
-  idx: number;
-  movies: Movie[];
+  movie: Movie;
 }
 
-const MovieItem: React.FC<MovieItemProps> = ({ idx, movies }) => {
-  if (!movies[idx])
-    return (
-      <>
-        <div className="MovieItem">
-          <div className="skeletonMovieImage" />
-          <div className="movieTitle"></div>
-          <div className="movieGernes">🎖️</div>
+const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
+  if (movie === undefined) return <SkeletonMovieItem />;
+  return (
+    <>
+      <div className="MovieItem" onClick={() => console.log(movie.genres)}>
+        <img
+          className="movieImage"
+          src={`https://image.tmdb.org/t/p/w200/${movie.poster}`}
+        />
+        <div className="movieTitle">{movie.title}</div>
+        <div className="movieGernes">
+          🎖️{Math.ceil(movie.ratings * 10) / 10}
         </div>
-      </>
-    );
-  else
-    return (
-      <>
-        <div className="MovieItem">
-          <img
-            className="movieImage"
-            src={`https://image.tmdb.org/t/p/w200/${movies[idx].poster}`}
-          />
-          <div className="movieTitle">{movies[idx].title}</div>
-          <div className="movieGernes">
-            🎖️{Math.ceil(movies[idx].ratings * 10) / 10}
-          </div>
-        </div>
-      </>
-    );
+      </div>
+    </>
+  );
 };
 
 export default MovieItem;

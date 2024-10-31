@@ -18,12 +18,14 @@ const Header: React.FC<HeaderProps> = ({
         value={searchText}
         onKeyDown={(e) => {
           if (e.key === "Enter") {
-            SetIsEnter((prev) => !prev);
+            SetIsEnter(true);
           }
         }}
         onChange={(e) => {
           setSearchText(e.target.value);
+          SetIsEnter(false);
         }}
+        style={{ fontSize: "30px", padding: "20px 0px" }}
       ></input>
     </div>
   );
