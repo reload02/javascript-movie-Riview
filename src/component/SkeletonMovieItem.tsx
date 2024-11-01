@@ -12,4 +12,10 @@ const SkeletonMovieItem: React.FC = () => {
   );
 };
 
-export default SkeletonMovieItem;
+const SkeletonMovieItems = () => {
+  const items = [];
+  for (let i = 20; i > 0; i--) items.push(<SkeletonMovieItem key={i} />);
+  return items;
+};
+
+export default SkeletonMovieItems;

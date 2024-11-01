@@ -2,12 +2,9 @@ import MovieItem from "./MovieItem";
 import "./MovieList.css";
 import { useState, useEffect, useRef } from "react";
 import convertApiResponseToMovieList from "../domain/convertApimoviesToMovies";
-import {
-  fetchPopularMovies,
-  fetchSearchMovies,
-  fetchTotalPage,
-} from "../domain/movieAPI";
+import { fetchPopularMovies, fetchSearchMovies } from "../domain/movieAPI";
 import { Movie } from "../util/type";
+import SkeletonMovieItems from "./SkeletonMovieItem";
 
 interface MovieListProps {
   searchText: string;
@@ -17,19 +14,29 @@ interface MovieListProps {
 const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
   const [page, setPage] = useState(1);
   const [movies, setMovie] = useState<Movie[]>([]);
-  const [itemCount, setItemCount] = useState(20);
   const observerRef = useRef(null);
-  const total_page = useRef(100);
-  const fetchData = async (page: number, searchText: string) => {
-    const data =
-      searchText === ""
-        ? await fetchPopularMovies(page)
-        : await fetchSearchMovies(page, searchText);
+  const [submitText, setSubmitText] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-    setMovie((prevMovies) => [
+  const applyPopularMovieList = async (page: number) => {
+    setIsLoading(true);
+    const data = await fetchPopularMovies(page);
+    await setMovie((prevMovies) => [
       ...prevMovies,
       ...convertApiResponseToMovieList(data),
     ]);
+    setIsLoading(false);
+  };
+
+  const applySearchMovieList = async (page: number, submitText: string) => {
+    setIsLoading(true);
+    const data = await fetchSearchMovies(page, submitText);
+    await setMovie((prevMovies) =>
+      prevMovies.length === 0
+        ? [...convertApiResponseToMovieList(data)]
+        : [...prevMovies, ...convertApiResponseToMovieList(data)]
+    );
+    setIsLoading(false);
   };
 
   useEffect(() => {
@@ -37,7 +44,6 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
       (entries) => {
         if (entries[0].isIntersecting) {
           setPage((prevPage) => prevPage + 1);
-          setItemCount((prev) => prev + 20); // 최대  페이지면 다르게
         }
       },
       { threshold: 1.0 }
@@ -46,34 +52,37 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
     return () => {
       if (observerRef.current) observer.unobserve(observerRef.current);
     };
-  }, []);
-
-  useEffect(() => {
-    setItemCount(movies.length);
   }, [movies]);
 
   useEffect(() => {
-    fetchData(page, searchText);
-  }, [page]);
+    if (page === 0) return;
+    submitText === ""
+      ? applyPopularMovieList(page)
+      : applySearchMovieList(page, submitText);
+  }, [page, submitText]);
 
   useEffect(() => {
     if (isEnter) {
-      setMovie([]);
-      setPage(1);
+      setSubmitText(searchText);
+      setPage(0);
+      setTimeout(() => {
+        setPage(1);
+        setMovie([]);
+      }, 0);
     }
   }, [isEnter]);
 
-  if (searchText !== "")
-    fetchTotalPage(searchText).then((result) => {
-      total_page.current = result;
-    });
-
   return (
     <div className="MovieList">
-      {Array.from({ length: itemCount }).map((_, index) => (
-        <MovieItem key={index} movie={movies[index]} />
-      ))}
-      {total_page.current !== page && (
+      {isLoading && SkeletonMovieItems()}
+      {movies.length === 0 ? (
+        <div className="NoResult">"{submitText}"의 검색 결과가 없어요.</div>
+      ) : (
+        movies.map((_, index) => (
+          <MovieItem key={index} movie={movies[index]} />
+        ))
+      )}
+      {movies.length > 19 && (
         <div ref={observerRef} style={{ height: "1px" }} />
       )}
     </div>

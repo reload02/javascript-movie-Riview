@@ -9,3 +9,8 @@
   display: flex;
   justify-content: center;
 }
+
+.NoResult {
+  grid-column: 1/-1;
+  font-size: 45px;
+}

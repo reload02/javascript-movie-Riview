@@ -46,7 +46,7 @@ export async function fetchTotalPage(searchText: string) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const data = await response.json();
-    return data.total_results;
+    return data.total_pages;
   } catch (error) {
     console.error("Fetch error:", error);
     return null;
