@@ -2,7 +2,11 @@ import MovieItem from "./MovieItem";
 import "./MovieList.css";
 import { useState, useEffect, useRef } from "react";
 import convertApiResponseToMovieList from "../domain/convertApimoviesToMovies";
-import { fetchPopularMovies, fetchSearchMovies } from "../domain/movieAPI";
+import {
+  fetchPopularMovies,
+  fetchSearchMovies,
+  fetchTotalPage,
+} from "../domain/movieAPI";
 import { Movie } from "../util/type";
 import SkeletonMovieItems from "./SkeletonMovieItem";
 
@@ -15,6 +19,7 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
   const [page, setPage] = useState(1);
   const [movies, setMovie] = useState<Movie[]>([]);
   const observerRef = useRef(null);
+  const lastPage = useRef(1);
   const [submitText, setSubmitText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -59,6 +64,9 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
     submitText === ""
       ? applyPopularMovieList(page)
       : applySearchMovieList(page, submitText);
+    fetchTotalPage((result) => {
+      lastPage.current = Number(result);
+    });
   }, [page, submitText]);
 
   useEffect(() => {
@@ -85,6 +93,7 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
       {movies.length > 19 && (
         <div ref={observerRef} style={{ height: "1px" }} />
       )}
+      {isLoading && lastPage.current >= page && SkeletonMovieItems()}
     </div>
   );
 };
