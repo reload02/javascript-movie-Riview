@@ -1,7 +1,7 @@
 import React from "react";
 import "./MovieDetailModal.css";
 import { Movie } from "../../util/type";
-import StarRating from "./starRating";
+import StarRating from "./StarRating.tsx";
 
 interface Props {
   isModalOpen: boolean;
