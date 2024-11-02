@@ -42,7 +42,6 @@ const MovieList: React.FC<Props> = ({ searchText, isEnter }) => {
   const applySearchMovieList = async (page: number, submitText: string) => {
     setIsLoading(true);
     const data = await fetchSearchMovies(page, submitText);
-    console.log(data);
     if (data === null) {
       setMovie(null);
       return;
