@@ -2,7 +2,7 @@
   "name": "movie_review",
   "private": true,
   "version": "0.0.0",
-  "homepage": "https://your-username.github.io/your-repo-name",
+  "homepage": "https://reload02.github.io/javascript-movie-Riview",
   "type": "module",
   "scripts": {
     "dev": "vite",
