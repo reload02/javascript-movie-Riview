@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import Header from "./component/Header.tsx";
+import Header from "./component/Header/Header.tsx";
 import "./App.css";
-import MovieList from "./component/MovieList.tsx";
+import MovieList from "./component/MovieList/MovieList.tsx";
 
 const App: React.FC = () => {
   const [searchText, setSearchText] = useState("");

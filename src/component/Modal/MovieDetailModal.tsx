@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./Modal.css";
-import { Movie } from "../util/type";
+import "./MovieDetailModal.css";
+import { Movie } from "../../util/type";
 
 interface ModalProps {
   isModalOpen: boolean;
@@ -22,7 +22,7 @@ const Modal: React.FC<ModalProps> = ({
   }, []);
 
   useEffect(() => {
-    pickedStar !== 5 &&
+    if (pickedStar !== 5)
       localStorage.setItem(movie.title, pickedStar.toString());
   }, [pickedStar]);
   if (!isModalOpen) return null;

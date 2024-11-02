@@ -1,6 +1,6 @@
 import "./MovieItem.css";
-import { Movie } from "../util/type";
-import Modal from "./Modal";
+import { Movie } from "../../util/type";
+import Modal from "../Modal/MovieDetailModal.tsx";
 import { useState } from "react";
 interface MovieItemProps {
   movie: Movie;
