@@ -29,7 +29,6 @@ const Modal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, movie }) => {
             <p className="movieRating">
               평점 : 🎖️{Math.ceil(movie.ratings * 10) / 10}
             </p>
-            <span>별점매기기 : </span>
             <StarRating movieId={movie.id} />
           </section>
         </section>

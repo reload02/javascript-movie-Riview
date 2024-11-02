@@ -13,8 +13,8 @@ const StarRating: React.FC<Props> = ({ movieId }) => {
   );
   useEffect(() => {
     if (pickedStar === -1) {
-      const storedRaing = storedRatings[movieId] || -1;
-      setPIckedStar(storedRaing);
+      const storedRating = storedRatings[movieId] || -1;
+      setPIckedStar(storedRating);
     }
     localStorage.setItem(
       movieRatingKey,

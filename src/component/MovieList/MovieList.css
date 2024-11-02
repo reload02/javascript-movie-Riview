@@ -7,6 +7,11 @@
   height: auto;
 }
 
+.MovieListTitle {
+  margin-left: 100px;
+  font-size: 30px;
+}
+
 @media (max-width: 1200px) {
   .MovieList {
     grid-template-columns: repeat(4, 1fr);

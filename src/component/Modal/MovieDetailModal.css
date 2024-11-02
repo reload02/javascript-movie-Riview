@@ -26,11 +26,13 @@
   font-size: 30px;
   flex: 1;
   margin: 0px;
+  height: 30px;
   border-bottom: 1px black solid;
 }
 
 .modalDetail {
   display: flex;
+  overflow-y: auto;
 }
 
 .leftSection.moviePoster {
@@ -42,9 +44,10 @@
 .rightSection {
   justify-content: center;
   flex: 1;
-  height: 400px;
+  height: 360px;
 }
 
 .movieOverview {
   height: 200px;
+  overflow: auto;
 }

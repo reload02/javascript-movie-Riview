@@ -96,19 +96,26 @@ const MovieList: React.FC<Props> = ({ searchText, isEnter }) => {
     return <p style={{ fontSize: "100px" }}>네트워크 오류가 발생했습니다..</p>;
   else
     return (
-      <div className="MovieList">
-        {isLoading && <SkeletonMovieItems />}
-        {movies.length === 0 ? (
-          <div className="NoResult">"{submitText}"의 검색 결과가 없어요.</div>
-        ) : (
-          movies.map((_, index) => (
-            <MovieItem key={index} movie={movies[index]} />
-          ))
-        )}
-        {movies.length > showingItemCount && (
-          <div ref={observerRef} style={{ height: "1px" }} />
-        )}
-        {isLoading && lastPage.current >= page && <SkeletonMovieItems />}
+      <div className="MovieListWrapper">
+        <div className="MovieListTitle">
+          {submitText === ""
+            ? "지금 인기있는 영화"
+            : `"${submitText}"의 검색 결과`}
+        </div>
+        <div className="MovieList">
+          {isLoading && <SkeletonMovieItems />}
+          {movies.length === 0 ? (
+            <div className="NoResult">검색 결과가 없어요.</div>
+          ) : (
+            movies.map((_, index) => (
+              <MovieItem key={index} movie={movies[index]} />
+            ))
+          )}
+          {movies.length > showingItemCount && (
+            <div ref={observerRef} style={{ height: "1px" }} />
+          )}
+          {isLoading && lastPage.current >= page && <SkeletonMovieItems />}
+        </div>
       </div>
     );
 };
