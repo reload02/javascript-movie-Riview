@@ -6,7 +6,9 @@
 }
 
 .movieListWrapper {
+  justify-content: space-between;
   display: flex;
+
   justify-content: center;
   flex-direction: column;
 }

@@ -1,50 +1,53 @@
-# React + TypeScript + Vite
+**tep1**
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**기능 요구사항**
 
-Currently, two official plugins are available:
+FE 레벨1 영화관 미션
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+1. 🎬 영화 목록 조회 (인기순) 영화 목록의 1페이지를 불러오며 더보기 버튼을 누르면 그 다음의 영화 목록을 불러 올 수 있다. 단, 페이지 끝에 도달한 경우에는 더보기 버튼을 화면에 출력하지 않는다. ⚠️ 인기순은 TMDB에서 제공하는 API의 속성 이름을 나타내는 것이므로 별도로 받은 데이터를 정렬하지 않습니다. figma 시안과는 달리 20개씩 영화 목록을 보여주면 됩니다. 영화 목록 아이템에 대한 Skeleton UI를 구현한다. Skeleton UI는 템플릿으로 제공되는 파일 이외로 자유롭게 구현할 수 있다.
+2. 🔎 검색 영화 검색 API를 이용하여 내가 보고 싶은 영화를 검색할 수 있다. 엔터키를 눌러 검색할 수 있다 검색 버튼을 클릭하여 검색할 수 있다 영화 목록 조회와 같이 검색한 결과에 한해 정보를 보여주는 화면의 요구사항은 동일하다
+3. ⚠️ 오류 오류가 발생하는 경우에는 사용자를 위한 오류 메시지를 띄워 준다. 어떤 오류를 대응해야 하고, 어떤 UI로 보여줄 것인지는 자율적으로 결정한다.
 
-## Expanding the ESLint configuration
+**UI 기능**
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+**컴포넌트**
 
-- Configure the top-level `parserOptions` property like this:
+- [x] Header: 아이콘 및 검색창을 가지는 헤더
+- [x] MovieItem: 영화 포스터 컴포넌트 (영화 이미지, 제목, 별점을 보여준다)
+- [x] SkeletonMovieItem: 영화 포스터 스켈레톤을 보여주는 컴포넌트
+- [x] MovieList: 상태에 따라 영화 포스터들을 보여주는 컴포넌트
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+**UX**
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- [x] 네트워크 요청 중: 스켈레톤 UI 보여주기
+- [x] 네트워크 요청 실패
+  - [x] 최초 접속 / 검색: MovieList에서 네트워크 오류 페이지를 보여준다
+- [x] 없는 영화를 검색했을 시: ‘”(검색어)"의 검색 결과가 없어요.' 텍스트를 보여준다.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+**step2**
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+**기능 요구사항**
+
+1. 📺 영화 상세정보 조회 영화 포스터나 제목을 클릭하면 자세한 예고편이나 줄거리 등의 정보를 보여준다
+2. ⭐️ 별점 매기기 별점을 남길 수 있는 기능을 만들어 본다
+3. 📐 UI⁄UX 개선하기 반응형 웹을 구상하여 디바이스의 너비에 따라 유동적으로 레이아웃이 조절되는 멋진 UI를 구현해 본다
+
+**UI 기능**
+
+**컴포넌트**
+
+- [x] Modal: 모달창을 열고 닫는 기능
+- [x] MovieDetailModal: 영화 상세 정보를 보여주는 모달
+- [x] StarRating: 수정할 수 있는 별점을 보여주는 컴포넌트(새로고침시에도 유지)
+- [x] MovieItem: 요약된 영화 정보를 보여주는 컴포넌트
+- [x] SkeletonMovieItem: 로딩중에 빈화면 대신 보여줄 컴포넌트
+- [x] MovieList: MovieItem들을 적절하게 보여주는 기능
+
+**UX**
+
+- [x] 무한 스크롤
+- [x] 반응형 UI
+  - [x] Header
+  - [x] MovieItemList
+  - [x] MovieItemList
+  - [x] MovieDetailModal
