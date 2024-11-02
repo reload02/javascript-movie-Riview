@@ -1,36 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import "./MovieDetailModal.css";
 import { Movie } from "../../util/type";
+import StarRating from "./starRating";
 
-interface ModalProps {
+interface Props {
   isModalOpen: boolean;
   setIsModalOpen: React.Dispatch<React.SetStateAction<boolean>>;
   movie: Movie;
 }
 
-const Modal: React.FC<ModalProps> = ({
-  isModalOpen,
-  setIsModalOpen,
-  movie,
-}) => {
-  const [pickedStar, setPIckedStar] = useState(5);
-  const [starList] = useState([true, true, true, true, true]);
-
-  useEffect(() => {
-    if (localStorage.getItem(movie.title) === null) setPIckedStar(5);
-    else setPIckedStar(Number(localStorage.getItem(movie.title)));
-  }, []);
-
-  useEffect(() => {
-    if (pickedStar !== 5)
-      localStorage.setItem(movie.title, pickedStar.toString());
-  }, [pickedStar]);
+const Modal: React.FC<Props> = ({ isModalOpen, setIsModalOpen, movie }) => {
   if (!isModalOpen) return null;
 
   return (
     <div className="modal" onClick={() => setIsModalOpen(false)}>
       <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-        <p className="modalTitle">{movie.title}</p>{" "}
+        <p className="modalTitle">{movie.title}</p>
         <section className="modalDetail">
           <section className="leftSection">
             <img
@@ -45,17 +30,7 @@ const Modal: React.FC<ModalProps> = ({
               평점 : 🎖️{Math.ceil(movie.ratings * 10) / 10}
             </p>
             <span>별점매기기 : </span>
-            {starList.map((_, index) => (
-              <span
-                key={index}
-                style={{ fontSize: "30px", cursor: "pointer" }}
-                onClick={() => {
-                  setPIckedStar(index);
-                }}
-              >
-                {pickedStar >= index ? "★" : "☆"}
-              </span>
-            ))}
+            <StarRating movieId={movie.id} />
           </section>
         </section>
       </div>

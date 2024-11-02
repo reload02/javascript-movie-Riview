@@ -10,12 +10,12 @@ import {
 import { Movie } from "../../util/type";
 import SkeletonMovieItems from "../MovieItem/SkeletonMovieItem";
 
-interface MovieListProps {
+interface Props {
   searchText: string;
   isEnter: boolean;
 }
 
-const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
+const MovieList: React.FC<Props> = ({ searchText, isEnter }) => {
   const [page, setPage] = useState(1);
   const [movies, setMovie] = useState<Movie[] | null>([]);
   const observerRef = useRef(null);

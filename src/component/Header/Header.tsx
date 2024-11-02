@@ -1,15 +1,11 @@
 import "./Header.css";
-interface HeaderProps {
+interface Props {
   setSearchText: React.Dispatch<React.SetStateAction<string>>;
   searchText: string;
   SetIsEnter: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: React.FC<HeaderProps> = ({
-  setSearchText,
-  searchText,
-  SetIsEnter,
-}) => {
+const Header: React.FC<Props> = ({ setSearchText, searchText, SetIsEnter }) => {
   return (
     <div className="Header">
       <p

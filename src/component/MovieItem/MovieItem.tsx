@@ -2,11 +2,11 @@ import "./MovieItem.css";
 import { Movie } from "../../util/type";
 import Modal from "../Modal/MovieDetailModal.tsx";
 import { useState } from "react";
-interface MovieItemProps {
+interface Props {
   movie: Movie;
 }
 
-const MovieItem: React.FC<MovieItemProps> = ({ movie }) => {
+const MovieItem: React.FC<Props> = ({ movie }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   return (
     <>

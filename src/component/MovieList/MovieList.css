@@ -1,27 +1,32 @@
 .MovieList {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 50px;
   justify-items: center;
   padding: 20px;
   height: auto;
 }
 
-/* Spinner.css */
-.spinner {
-  border: 8px solid rgba(0, 0, 0, 0.1); /* Outer border */
-  border-top: 8px solid #3498db; /* Top border (spinner color) */
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
+@media (max-width: 1200px) {
+  .MovieList {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+@media (max-width: 1030px) {
+  .MovieList {
+    grid-template-columns: repeat(3, 1fr);
   }
-  100% {
-    transform: rotate(360deg);
+}
+
+@media (max-width: 770px) {
+  .MovieList {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 470px) {
+  .MovieList {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
