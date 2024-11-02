@@ -4,7 +4,7 @@ interface Props {
   searchText: string;
   SetIsEnter: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
+//
 const Header: React.FC<Props> = ({ setSearchText, searchText, SetIsEnter }) => {
   return (
     <div className="Header">
