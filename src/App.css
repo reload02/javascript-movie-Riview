@@ -6,6 +6,14 @@
 }
 
 .movieListWrapper {
+  justify-content: space-between;
   display: flex;
+
   justify-content: center;
+  flex-direction: column;
+}
+
+.NoResult {
+  grid-column: 1/-1;
+  font-size: 45px;
 }

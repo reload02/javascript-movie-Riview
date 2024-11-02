@@ -1,0 +1,37 @@
+.Header {
+  background-color: bisque;
+  padding: 30px;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.appTitle {
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.searchBar {
+  font-size: 30px;
+  padding: 20px 20px;
+  margin: 20px;
+  border-radius: 10px;
+  border: none;
+}
+@media (max-width: 670px) {
+  .appTitle {
+    font-size: 0px;
+  }
+}
+
+@media (max-width: 480px) {
+  .searchBar {
+    width: 0px;
+    padding: 0px;
+  }
+  .appTitle {
+    font-size: 30px;
+    margin: auto;
+  }
+}

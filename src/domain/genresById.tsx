@@ -23,12 +23,14 @@ const genresArray: Genre[] = [
 ];
 
 const genresById = (genresId: number[]): string[] => {
-  const temp: string[] = genresId
+  if (genresId === undefined) return ["장르없음"];
+  const genreName: string[] = genresId
     .map(
       (id) => genresArray.find((genre) => Number(id) === Number(genre.id))?.name
     )
-    .filter((name): name is string => name !== undefined); // undefined 필터링
-  return temp;
+    .filter((name): name is string => name !== undefined);
+  if (genreName.length === 0) return ["장르없음"];
+  return genreName;
 };
 
 export default genresById;

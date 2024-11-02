@@ -1,7 +1,0 @@
-.MovieList {
-  display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 50px;
-  justify-items: center;
-  padding: 20px;
-}

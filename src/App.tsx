@@ -1,16 +1,20 @@
 import React, { useState } from "react";
-import Movie from "./component/MovieItem.tsx";
-import Store from "./domain/Store.tsx";
-import Header from "./component/Header.tsx";
+import Header from "./component/Header/Header.tsx";
 import "./App.css";
-import MovieList from "./component/MovieList.tsx";
+import MovieList from "./component/MovieList/MovieList.tsx";
 
 const App: React.FC = () => {
+  const [searchText, setSearchText] = useState("");
+  const [isEnter, SetIsEnter] = useState(false);
   return (
     <div className="App">
-      <Header />
+      <Header
+        searchText={searchText}
+        setSearchText={setSearchText}
+        SetIsEnter={SetIsEnter}
+      />
       <div className="movieListWrapper">
-        <MovieList />
+        <MovieList searchText={searchText} isEnter={isEnter} />
       </div>
     </div>
   );
