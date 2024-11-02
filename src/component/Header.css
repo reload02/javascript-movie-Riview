@@ -3,4 +3,19 @@
   padding: 30px;
   border-radius: 5px;
   display: flex;
+  justify-content: space-between;
+}
+
+.appTitle {
+  font-size: 30px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.searchBar {
+  font-size: 30px;
+  padding: 20px 20px;
+  margin: 20px;
+  border-radius: 10px;
+  border: none;
 }

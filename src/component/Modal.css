@@ -12,11 +12,45 @@
 }
 
 .modalContent {
+  display: flex;
   background-color: #ffffff; /* 흰색 배경 */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  max-width: 500px;
-  width: 90%;
+  width: 800px;
+  height: 400px;
   text-align: center;
+  flex-direction: column;
+}
+.modalTitle {
+  font-size: 30px;
+  flex: 1;
+  margin: 0px;
+  border-bottom: 1px black solid;
+}
+
+.modalDetail {
+  display: flex;
+}
+
+.leftSection.moviePoster {
+  margin-top: 40px;
+  width: 200px;
+  height: 300px;
+}
+
+.rightSection {
+  justify-content: center;
+  flex: 1;
+  height: 400px;
+}
+
+.movieGenre {
+}
+
+.movieOverview {
+  height: 200px;
+}
+
+.movieRating {
 }

@@ -20,6 +20,7 @@ const Modal: React.FC<ModalProps> = ({
     if (localStorage.getItem(movie.title) === null) setPIckedStar(5);
     else setPIckedStar(Number(localStorage.getItem(movie.title)));
   }, []);
+
   useEffect(() => {
     pickedStar !== 5 &&
       localStorage.setItem(movie.title, pickedStar.toString());
@@ -29,23 +30,34 @@ const Modal: React.FC<ModalProps> = ({
   return (
     <div className="modal" onClick={() => setIsModalOpen(false)}>
       <div className="modalContent" onClick={(e) => e.stopPropagation()}>
-        <img src={`https://image.tmdb.org/t/p/w200/${movie.poster}`} />
-        <h2>{movie.title}</h2>
-        <p>Genres: {movie.genres}</p>
-        <p>{movie.overview}</p>
-        <p>Rating: 🎖️{Math.ceil(movie.ratings * 10) / 10}</p>
-        <span>별점매기기 : </span>
-        {starList.map((_, index) => (
-          <span
-            key={index}
-            style={{ fontSize: "30px", cursor: "pointer" }}
-            onClick={() => {
-              setPIckedStar(index);
-            }}
-          >
-            {pickedStar >= index ? "★" : "☆"}
-          </span>
-        ))}
+        <p className="modalTitle">{movie.title}</p>{" "}
+        <section className="modalDetail">
+          <section className="leftSection">
+            <img
+              className="moviePoster"
+              src={`https://image.tmdb.org/t/p/w200/${movie.poster}`}
+            />
+          </section>
+          <section className="rightSection">
+            <p className="movieGenre">장르 : {movie.genres}</p>
+            <p className="movieOverview">{movie.overview}</p>
+            <p className="movieRating">
+              평점 : 🎖️{Math.ceil(movie.ratings * 10) / 10}
+            </p>
+            <span>별점매기기 : </span>
+            {starList.map((_, index) => (
+              <span
+                key={index}
+                style={{ fontSize: "30px", cursor: "pointer" }}
+                onClick={() => {
+                  setPIckedStar(index);
+                }}
+              >
+                {pickedStar >= index ? "★" : "☆"}
+              </span>
+            ))}
+          </section>
+        </section>
       </div>
     </div>
   );

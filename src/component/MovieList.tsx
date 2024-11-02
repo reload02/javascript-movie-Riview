@@ -23,6 +23,8 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
   const [submitText, setSubmitText] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  const showingItemCount = 19;
+
   const applyPopularMovieList = async (page: number) => {
     setIsLoading(true);
     const data = await fetchPopularMovies(page);
@@ -64,7 +66,7 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
     submitText === ""
       ? applyPopularMovieList(page)
       : applySearchMovieList(page, submitText);
-    fetchTotalPage((result) => {
+    fetchTotalPage(searchText).then((result) => {
       lastPage.current = Number(result);
     });
   }, [page, submitText]);
@@ -90,7 +92,7 @@ const MovieList: React.FC<MovieListProps> = ({ searchText, isEnter }) => {
           <MovieItem key={index} movie={movies[index]} />
         ))
       )}
-      {movies.length > 19 && (
+      {movies.length > showingItemCount && (
         <div ref={observerRef} style={{ height: "1px" }} />
       )}
       {isLoading && lastPage.current >= page && SkeletonMovieItems()}

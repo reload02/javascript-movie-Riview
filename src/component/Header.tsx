@@ -12,7 +12,19 @@ const Header: React.FC<HeaderProps> = ({
 }) => {
   return (
     <div className="Header">
-      영화사이트
+      <p
+        className="appTitle"
+        onClick={() => {
+          setSearchText("");
+          SetIsEnter(false);
+          setTimeout(() => {
+            SetIsEnter(true);
+          }, 300);
+        }}
+      >
+        🎞️🎞️🔍
+      </p>
+
       <input
         placeholder="검색"
         value={searchText}
@@ -25,7 +37,7 @@ const Header: React.FC<HeaderProps> = ({
           setSearchText(e.target.value);
           SetIsEnter(false);
         }}
-        style={{ fontSize: "30px", padding: "20px 0px" }}
+        className="searchBar"
       ></input>
     </div>
   );
